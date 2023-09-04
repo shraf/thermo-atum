@@ -33,17 +33,23 @@ def calculate_sheet_data(sheet, start=0, end=-1):
     new_data[0]['entropy'] = entropy
     new_data[0]['enthalapy'] = enthalapy
     new_data[0]['gibs_free_energy'] = gibbs_free_energy
+    new_data[0]['slope'] = linear_fit['slope']
+    new_data[0]['intercept'] =  linear_fit['intercept']
     return new_data
                          
 
 def calculate_row_data(row, initial_row, final_row):
+    weight = row[1]
     temp = row[0]
     temp_kel = utils.convert_from_celsius_to_kelvin(temp)
     x_axis = get_x_axis(temp_kel)
-    y_axis = get_y_axis(temp, initial_row[0], final_row[0])
+    y_axis = get_y_axis(temp_kel, weight, initial_row[1], final_row[1])
     return {
         "x_axis":x_axis,
-        "y_axis": y_axis
+        "y_axis": y_axis,
+        "Tc":row[0],
+        "W":row[1],
+        "alpha":get_alpha(weight, initial_row[1], final_row[1])
     }
 
 def calculate_entropy(enthalapy, gibbs, temp_final):
@@ -63,8 +69,8 @@ def calculate_axis_linear_fit(row ,slope, intercept):
 def get_x_axis(temp: int):
     return 1000/temp
 
-def get_y_axis(temp, temp_initial, temp_final):
-    alpha = get_alpha(temp, temp_initial, temp_final)
+def get_y_axis(temp, weight, weight_initial, weight_final):
+    alpha = get_alpha(weight, weight_initial, weight_final)
     if alpha >= 1:
         return None
     beta = math.log(1-alpha)/temp**2

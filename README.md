@@ -26,11 +26,11 @@ No license for now
 &nbsp;&nbsp;&nbsp;&nbsp;2-	The first column is Temperature (oC), and the second column is Weight (mg).  
 &nbsp;&nbsp;&nbsp;&nbsp;3-	Move the Excel sheet to “test” file in the folder of the package.  
 &nbsp;&nbsp;&nbsp;&nbsp;4-	Open terminal for Ubuntu or Windows (command line).  
-&nbsp;&nbsp;&nbsp;&nbsp;5-	Use cd command to be at the location of the package, for example: `cd f/new_folder/Thermo_ATUM_v1.0.`  
+&nbsp;&nbsp;&nbsp;&nbsp;5-	Use cd command to be at the location of the package, for example: `cd f/new_folder/thermo_atum`  
 &nbsp;&nbsp;&nbsp;&nbsp;6-	Setup required dependencies using the following command python `setup.py install`
-&nbsp;&nbsp;&nbsp;&nbsp;7-	Write the following command: `python3 Thermo_ATUM.py -i ./test/TGA_input_filename.xlsx -o ./test/TGA_output_filename.xlsx --start T1 --end T2`  
+&nbsp;&nbsp;&nbsp;&nbsp;7-	Write the following command: `python thermo_atum.py -i ./test/TGA_input_filename.xlsx -o ./test/TGA_output_filename.xlsx --start T1 --end T2`  
 &nbsp;&nbsp;&nbsp;&nbsp;8-	In TGA_input_filename.xlsx write the Excel name which is made in step 1.  
 &nbsp;&nbsp;&nbsp;&nbsp;9-	In TGA_output_filename.xlsx write the desired name for the output Excel.  
 &nbsp;&nbsp;&nbsp;&nbsp;10-	T1 is the initial temperature for the reaction (when weight loss starts) or can be the start of a peak in DSC or DTA, and T2 is the final temperature of the reaction or transformation.  
-&nbsp;&nbsp;&nbsp;&nbsp;11-	Now Coats-Redfern model is applied and a new Excel with your desired name is created in “test” file containing x=1000/T (oK) and y=**** in addition, to entropy, enthalpy, Gibbs free energy, and activation energy.  
+&nbsp;&nbsp;&nbsp;&nbsp;11-	Now Coats-Redfern model is applied and a new Excel with your desired name is created in “test” file containing x=1000/T (oK) and y=ln(-ln(1-alpha)/Tk^2) in addition, to entropy, enthalpy, Gibbs free energy, and activation energy.  
 &nbsp;&nbsp;&nbsp;&nbsp;12-	You can repeat these steps for any reaction detected by TGA, DTA, or DSC.
