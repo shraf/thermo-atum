@@ -25,7 +25,7 @@ def calculate_sheet_data(sheet, start=0, end=-1):
     for row in new_data:
         row['y_fitted'] = calculate_y(row['x_axis'], linear_fit['slope'], linear_fit['intercept'])
     activation_energy = calculate_activation_energy(linear_fit['slope'])
-    final_temp = utils.convert_from_celsius_to_kelvin(final_row[0])
+    final_temp = utils.convert_from_celsius_to_kelvin(final_row.iloc[0])
     enthalapy = calculate_enthalapy(activation_energy, final_temp)
     gibbs_free_energy = calculate_gibbs_free_energy(activation_energy, final_temp, linear_fit['intercept'], temp_rate)
     entropy = calculate_entropy(enthalapy, gibbs_free_energy, final_temp)
@@ -39,17 +39,18 @@ def calculate_sheet_data(sheet, start=0, end=-1):
                          
 
 def calculate_row_data(row, initial_row, final_row):
-    weight = row[1]
-    temp = row[0]
+
+    weight = row.iloc[1]
+    temp = row.iloc[0]
     temp_kel = utils.convert_from_celsius_to_kelvin(temp)
     x_axis = get_x_axis(temp_kel)
-    y_axis = get_y_axis(temp_kel, weight, initial_row[1], final_row[1])
+    y_axis = get_y_axis(temp_kel, weight, initial_row.iloc[1], final_row.iloc[1])
     return {
         "x_axis":x_axis,
         "y_axis": y_axis,
-        "Tc":row[0],
-        "W":row[1],
-        "alpha":get_alpha(weight, initial_row[1], final_row[1])
+        "Tc":row.iloc[0],
+        "W":row.iloc[1],
+        "alpha":get_alpha(weight, initial_row.iloc[1], final_row.iloc[1])
     }
 
 def calculate_entropy(enthalapy, gibbs, temp_final):
